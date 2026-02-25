@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code on Wheels — Who We Are Wireframe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #e8eef8;
+      color: #333;
+    }
+
+    /* ── Wireframe wrapper ── */
+    .wireframe {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      border: 2px solid #bbc8e8;
+      box-shadow: 0 4px 24px rgba(75,142,243,.15);
+      overflow: hidden;
+    }
+
+    /* ── Label chip ── */
+    .section-label {
+      display: inline-block;
+      background: #4b8ef3;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    /* ─────────────── NAV ─────────────── */
+    .nav {
+      background: #4b8ef3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 56px;
+    }
+    .nav .logo-box {
+      width: 120px; height: 28px;
+      background: rgba(255,255,255,.28);
+      border-radius: 4px;
+    }
+    .nav .nav-links { display: flex; gap: 20px; }
+    .nav .nav-links span {
+      width: 70px; height: 14px;
+      background: rgba(255,255,255,.38);
+      border-radius: 3px;
+      display: block;
+    }
+    .nav .nav-btn {
+      background: #fff;
+      color: #4b8ef3;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+
+    /* ─────────────── HERO ─────────────── */
+    .hero {
+      background: #dce8fd;
+      padding: 64px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      border-bottom: 2px dashed #a8c4f5;
+    }
+    .hero .headline {
+      width: 420px; height: 42px;
+      background: #aec8f7;
+      border-radius: 6px;
+    }
+    .hero .sub {
+      width: 520px; height: 16px;
+      background: #c4d8fa;
+      border-radius: 4px;
+    }
+    .hero .sub2 {
+      width: 440px; height: 16px;
+      background: #c4d8fa;
+      border-radius: 4px;
+    }
+    .hero .sub3 {
+      width: 360px; height: 16px;
+      background: #c4d8fa;
+      border-radius: 4px;
+    }
+
+    /* ─────────────── Shared section ─────────────── */
+    .section {
+      padding: 48px 32px;
+      border-bottom: 2px dashed #dde6f7;
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+    .section-intro {
+      margin-bottom: 24px;
+    }
+    .section-intro .intro-heading {
+      height: 26px; width: 40%;
+      background: #c8d8f5; border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .section-intro .intro-line {
+      height: 13px; background: #dde8fb; border-radius: 3px;
+      margin-bottom: 7px;
+    }
+    .section-intro .intro-line.full  { width: 100%; }
+    .section-intro .intro-line.med   { width: 75%; }
+    .section-intro .intro-line.short { width: 50%; }
+
+    /* ─────────────── BTN ─────────────── */
+    .btn {
+      display: inline-block;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 22px;
+      cursor: default;
+      width: fit-content;
+      margin-top: 6px;
+    }
+    .btn-primary { background: #4b8ef3; color: #fff; }
+    .btn-outline  { border: 2px solid #4b8ef3; color: #4b8ef3; background: transparent; }
+    .btn-ghost {
+      border: 1.5px dashed #4b8ef3;
+      color: #4b8ef3;
+      background: rgba(75,142,243,.06);
+      font-size: 11px;
+      padding: 6px 16px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #7a9ec0;
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    /* ─────────────── TEAM MEMBER GRID ─────────────── */
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .member-card {
+      background: #f0f5fe;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+    .member-card .headshot {
+      width: 72px; height: 72px;
+      background: #aec8f7;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .member-card .member-name {
+      height: 18px; width: 65%;
+      background: #c0d4f8; border-radius: 4px;
+    }
+    .member-card .member-title {
+      height: 13px; width: 80%;
+      background: #d8e6fc; border-radius: 3px;
+    }
+    .member-card .member-line {
+      height: 12px; width: 100%;
+      background: #dde8fb; border-radius: 3px;
+    }
+    .member-card .member-line.short { width: 75%; }
+
+    /* modal indicator badge */
+    .modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(75,142,243,.1);
+      border: 1px dashed #4b8ef3;
+      border-radius: 16px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #4b8ef3;
+      margin-top: 2px;
+    }
+    .modal-badge::before {
+      content: "⊕";
+      font-size: 12px;
+    }
+
+    /* ─────────────── TESTIMONIAL ─────────────── */
+    .testimonial-section {
+      background: #4b8ef3;
+      padding: 48px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+      border-bottom: 2px dashed #a8c4f5;
+    }
+    .quote-mark {
+      font-size: 48px;
+      line-height: 1;
+      color: rgba(255,255,255,.4);
+      font-family: Georgia, serif;
+    }
+    .quote-line {
+      height: 18px; background: rgba(255,255,255,.35);
+      border-radius: 4px;
+    }
+    .quote-line.full  { width: 80%; }
+    .quote-line.med   { width: 65%; }
+    .quote-line.short { width: 45%; }
+    .attribution {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      margin-top: 4px;
+    }
+    .attribution .attr-name {
+      height: 14px; width: 120px;
+      background: rgba(255,255,255,.5); border-radius: 3px;
+    }
+    .attribution .attr-sub {
+      height: 11px; width: 90px;
+      background: rgba(255,255,255,.25); border-radius: 3px;
+    }
+    .testimonial-label {
+      display: inline-block;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* ─────────────── STATS BLOCK ─────────────── */
+    .stats-section { background: #f0f5fe; }
+    .stats-intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .stats-intro .stats-heading {
+      height: 30px; width: 50%;
+      background: #aec8f7; border-radius: 6px;
+      margin: 0 auto 12px;
+    }
+    .stats-intro .stats-sub {
+      height: 14px; background: #c4d8fa; border-radius: 3px;
+      margin: 0 auto 7px;
+    }
+    .stats-intro .stats-sub.full  { width: 70%; }
+    .stats-intro .stats-sub.med   { width: 55%; }
+
+    .stat-card {
+      background: #fff;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 10px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+    .stat-card .big-stat {
+      font-size: 40px; font-weight: 900;
+      color: #4b8ef3; line-height: 1;
+    }
+    .stat-card .stat-label {
+      height: 16px; width: 70%;
+      background: #c0d4f8; border-radius: 4px;
+    }
+    .stat-card .stat-line {
+      height: 12px; width: 85%;
+      background: #dde8fb; border-radius: 3px;
+    }
+    .stat-card .stat-line.short { width: 60%; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    .footer {
+      background: #1a2d52;
+      padding: 40px 32px 24px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr;
+      gap: 28px;
+    }
+    .footer-logo {
+      width: 100px; height: 26px;
+      background: rgba(255,255,255,.22);
+      border-radius: 4px; margin-bottom: 12px;
+    }
+    .footer-line {
+      height: 11px; background: rgba(255,255,255,.15);
+      border-radius: 3px; margin-bottom: 7px;
+    }
+    .footer-line.s { width: 60%; }
+    .footer-heading {
+      height: 14px; width: 70%;
+      background: rgba(255,255,255,.38);
+      border-radius: 3px; margin-bottom: 12px;
+    }
+    .social-icons { display: flex; gap: 10px; margin-top: 10px; }
+    .social-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+    }
+    .footer-newsletter {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .newsletter-btn {
+      background: #4b8ef3; color: #fff;
+      font-size: 12px; font-weight: 700;
+      padding: 9px 18px; border-radius: 18px;
+      width: fit-content;
+    }
+    .footer-newsletter .nl-label {
+      height: 14px; width: 80%;
+      background: rgba(255,255,255,.38);
+      border-radius: 3px; margin-bottom: 4px;
+    }
+    .footer-newsletter .nl-sub {
+      height: 11px; width: 90%;
+      background: rgba(255,255,255,.15);
+      border-radius: 3px;
+    }
+    .footer-newsletter .nl-sub.s { width: 65%; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 16px;
+    }
+    .footer-bottom-line {
+      height: 11px; width: 140px;
+      background: rgba(255,255,255,.15); border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<div style="text-align:center; padding: 20px 0 8px; font-size:13px; color:#4b8ef3; font-weight:700; letter-spacing:.06em; text-transform:uppercase;">
+  Code on Wheels — Who We Are — Page Wireframe
+</div>
+
+<div class="wireframe">
+
+  <!-- ① NAV -->
+  <nav class="nav">
+    <div class="logo-box"></div>
+    <div class="nav-links">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="nav-btn">Donate</div>
+  </nav>
+
+  <!-- ② HERO -->
+  <div class="hero">
+    <span class="section-label">Hero Banner</span>
+    <div class="headline"></div>
+    <div class="sub"></div>
+    <div class="sub2"></div>
+    <div class="sub3"></div>
+  </div>
+
+  <!-- ③ LEADERSHIP TEAM — 3 col -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-label">3-Column Team Grid</span>
+      &nbsp; Leadership Team
+    </div>
+    <div class="section-intro">
+      <div class="intro-heading"></div>
+      <div class="intro-line full"></div>
+      <div class="intro-line med"></div>
+      <div class="intro-line short"></div>
+    </div>
+    <div class="three-col">
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Team Member</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Team Member</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Team Member</div>
+      </div>
+    </div>
+    <div class="note">↑ "About Team Member" button opens a modal with full bio</div>
+  </div>
+
+  <!-- ④ STUDENT TESTIMONIAL -->
+  <div class="testimonial-section">
+    <span class="testimonial-label">Student Testimonial</span>
+    <div class="quote-mark">"</div>
+    <div class="quote-line full"></div>
+    <div class="quote-line med"></div>
+    <div class="quote-line full"></div>
+    <div class="quote-line short"></div>
+    <div class="attribution">
+      <div class="attr-name"></div>
+      <div class="attr-sub"></div>
+    </div>
+  </div>
+
+  <!-- ⑤ INSTRUCTORS — 3 col -->
+  <div class="section" style="background:#f0f5fe;">
+    <div class="section-title">
+      <span class="section-label">3-Column Team Grid</span>
+      &nbsp; Instructors
+    </div>
+    <div class="section-intro">
+      <div class="intro-heading"></div>
+      <div class="intro-line full"></div>
+      <div class="intro-line med"></div>
+      <div class="intro-line short"></div>
+    </div>
+    <div class="three-col">
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Instructor</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Instructor</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Instructor</div>
+      </div>
+    </div>
+    <div class="note">↑ "About Instructor" button opens a modal with full bio</div>
+  </div>
+
+  <!-- ⑥ STATS BLOCK — 3 col -->
+  <div class="section stats-section">
+    <div class="section-title">
+      <span class="section-label">3-Column Stats Block</span>
+      &nbsp; Student Satisfaction Data
+    </div>
+    <div class="stats-intro">
+      <div class="stats-heading"></div>
+      <div class="stats-sub full"></div>
+      <div class="stats-sub med"></div>
+    </div>
+    <div class="three-col">
+      <div class="stat-card">
+        <div class="big-stat">94%</div>
+        <div class="stat-label"></div>
+        <div class="stat-line"></div>
+        <div class="stat-line short"></div>
+      </div>
+      <div class="stat-card">
+        <div class="big-stat">88%</div>
+        <div class="stat-label"></div>
+        <div class="stat-line"></div>
+        <div class="stat-line short"></div>
+      </div>
+      <div class="stat-card">
+        <div class="big-stat">97%</div>
+        <div class="stat-label"></div>
+        <div class="stat-line"></div>
+        <div class="stat-line short"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ BOARD MEMBERS — 3 col -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-label">3-Column Team Grid</span>
+      &nbsp; Board Members
+    </div>
+    <div class="section-intro">
+      <div class="intro-heading"></div>
+      <div class="intro-line full"></div>
+      <div class="intro-line med"></div>
+      <div class="intro-line short"></div>
+    </div>
+    <div class="three-col">
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Board Member</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Board Member</div>
+      </div>
+      <div class="member-card">
+        <div class="headshot"></div>
+        <div class="member-name"></div>
+        <div class="member-title"></div>
+        <div class="member-line"></div>
+        <div class="member-line short"></div>
+        <div class="member-line"></div>
+        <div class="modal-badge">About Board Member</div>
+      </div>
+    </div>
+    <div class="note">↑ "About Board Member" button opens a modal with full bio</div>
+  </div>
+
+  <!-- ⑧ FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="social-icons">
+          <div class="social-icon"></div>
+          <div class="social-icon"></div>
+          <div class="social-icon"></div>
+          <div class="social-icon"></div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+      </div>
+      <div class="footer-newsletter">
+        <div class="nl-label"></div>
+        <div class="nl-sub"></div>
+        <div class="nl-sub s"></div>
+        <div class="newsletter-btn">Sign Up for Newsletter →</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-line"></div>
+      <div style="display:flex; gap:20px;">
+        <div class="footer-bottom-line" style="width:80px;"></div>
+        <div class="footer-bottom-line" style="width:80px;"></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Section index legend -->
+<div style="max-width:1100px; margin: 20px auto 40px; padding: 16px 24px; background:#fff; border:1.5px solid #c0d4f8; border-radius:8px; font-size:12px; color:#555; line-height:1.9;">
+  <strong style="font-size:13px; color:#4b8ef3;">Section Index</strong><br>
+  ① Nav Bar &nbsp;|&nbsp; ② Hero Banner &nbsp;|&nbsp;
+  ③ Leadership Team — 3-Col Grid + Bio Modal &nbsp;|&nbsp;
+  ④ Student Testimonial (full-bleed) &nbsp;|&nbsp;
+  ⑤ Instructors — 3-Col Grid + Bio Modal &nbsp;|&nbsp;
+  ⑥ Stats Block — 3-Col (Student Satisfaction %) &nbsp;|&nbsp;
+  ⑦ Board Members — 3-Col Grid + Bio Modal &nbsp;|&nbsp;
+  ⑧ Footer — Brand · Links · Contact · Newsletter (button only)
+</div>
+
+</body>
+</html>
