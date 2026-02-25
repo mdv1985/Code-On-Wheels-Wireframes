@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code on Wheels — Impact Page Wireframe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #e8eef8;
+      color: #333;
+    }
+
+    .wireframe {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      border: 2px solid #bbc8e8;
+      box-shadow: 0 4px 24px rgba(75,142,243,.15);
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: #4b8ef3;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: #4b8ef3;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 56px;
+    }
+    .nav .logo-box { width: 120px; height: 28px; background: rgba(255,255,255,.28); border-radius: 4px; }
+    .nav .nav-links { display: flex; gap: 20px; }
+    .nav .nav-links span { width: 70px; height: 14px; background: rgba(255,255,255,.38); border-radius: 3px; display: block; }
+    .nav .nav-btn { background: #fff; color: #4b8ef3; font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #dce8fd;
+      padding: 64px 32px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;
+      border-bottom: 2px dashed #a8c4f5;
+    }
+    .hero .headline { width: 440px; height: 42px; background: #aec8f7; border-radius: 6px; }
+    .hero .sub { height: 16px; background: #c4d8fa; border-radius: 4px; }
+    .hero .sub.w1 { width: 520px; }
+    .hero .sub.w2 { width: 400px; }
+
+    /* ── SHARED ── */
+    .section { padding: 48px 32px; border-bottom: 2px dashed #dde6f7; }
+    .section-title { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 20px; }
+    .note { font-size: 11px; color: #7a9ec0; font-style: italic; margin-top: 8px; }
+
+    .btn { display: inline-block; border-radius: 20px; font-size: 12px; font-weight: 700; padding: 8px 22px; cursor: default; width: fit-content; }
+    .btn-primary { background: #4b8ef3; color: #fff; }
+
+    /* ── 3-COL ── */
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    /* ── DEMOGRAPHICS — infographic cards ── */
+    .demo-card {
+      background: #f0f5fe;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .demo-card .demo-heading { height: 18px; width: 70%; background: #c0d4f8; border-radius: 4px; }
+    .demo-card .demo-year { height: 12px; width: 40%; background: #aec8f7; border-radius: 3px; opacity: .7; }
+
+    /* bar chart placeholder */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 100px;
+      padding-top: 8px;
+    }
+    .bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+    .bar { width: 100%; background: #4b8ef3; border-radius: 4px 4px 0 0; opacity: .75; }
+    .bar-label { height: 9px; width: 90%; background: #c0d4f8; border-radius: 2px; }
+
+    /* donut chart placeholder */
+    .donut-wrap {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .donut {
+      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(#4b8ef3 0% 52%, #aec8f7 52% 80%, #dde8fb 80% 100%);
+      position: relative;
+    }
+    .donut::after {
+      content: '';
+      position: absolute; inset: 18px;
+      background: #f0f5fe; border-radius: 50%;
+    }
+    .donut-legend { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-line { height: 10px; flex: 1; background: #dde8fb; border-radius: 2px; }
+
+    /* ── OUTCOMES — stat cards ── */
+    .outcomes-intro { margin-bottom: 24px; }
+    .outcomes-intro .oi-heading { height: 26px; width: 55%; background: #c8d8f5; border-radius: 5px; margin-bottom: 10px; }
+    .outcomes-intro .oi-line { height: 13px; background: #dde8fb; border-radius: 3px; margin-bottom: 7px; }
+    .outcomes-intro .oi-line.full  { width: 100%; }
+    .outcomes-intro .oi-line.med   { width: 75%; }
+
+    .outcome-card {
+      background: #f0f5fe;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 12px;
+      padding: 24px 20px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+    }
+    .outcome-pct { font-size: 40px; font-weight: 900; color: #4b8ef3; line-height: 1; }
+    .outcome-bar-bg {
+      width: 100%; height: 10px;
+      background: #dde8fb; border-radius: 5px; overflow: hidden;
+    }
+    .outcome-bar-fill { height: 100%; background: #4b8ef3; border-radius: 5px; }
+    .outcome-label { height: 14px; width: 80%; background: #c0d4f8; border-radius: 3px; }
+    .outcome-sub { height: 11px; width: 65%; background: #dde8fb; border-radius: 3px; }
+
+    /* ── MAP EMBED ── */
+    .map-section { background: #f0f5fe; }
+    .map-container {
+      background: #c8d8f5;
+      border: 1.5px solid #a8c4f5;
+      border-radius: 12px;
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .map-bg {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, rgba(255,255,255,.15) 0px, rgba(255,255,255,.15) 1px, transparent 1px, transparent 40px
+      ),
+      repeating-linear-gradient(
+        90deg, rgba(255,255,255,.15) 0px, rgba(255,255,255,.15) 1px, transparent 1px, transparent 40px
+      );
+    }
+    .map-label-center { position: relative; font-size: 13px; font-weight: 700; color: #4b8ef3; letter-spacing: .05em; }
+
+    /* map pins */
+    .map-pin {
+      position: absolute;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    }
+    .pin-club     { background: #4b8ef3; }
+    .pin-class    { background: #2ad4a0; }
+    .pin-workshop { background: #f0c840; }
+
+    .map-legend {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid #c0d4f8;
+      border-radius: 8px; padding: 10px 14px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .legend-row { display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; color: #555; }
+    .legend-pip { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section {
+      background: #4b8ef3;
+      padding: 56px 80px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;
+      border-bottom: 2px dashed #a8c4f5;
+    }
+    .testimonial-label { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; }
+    .quote-mark { font-size: 52px; line-height: 1; color: rgba(255,255,255,.35); font-family: Georgia, serif; }
+    .quote-line { height: 18px; background: rgba(255,255,255,.32); border-radius: 4px; }
+    .quote-line.w1 { width: 75%; }
+    .quote-line.w2 { width: 60%; }
+    .quote-line.w3 { width: 80%; }
+    .quote-line.w4 { width: 50%; }
+    .attr-name { height: 14px; width: 120px; background: rgba(255,255,255,.5); border-radius: 3px; }
+    .attr-sub  { height: 11px; width: 90px;  background: rgba(255,255,255,.25); border-radius: 3px; }
+
+    /* ── LINE CHART ── */
+    .chart-section { background: #f7f9ff; }
+    .chart-intro { margin-bottom: 24px; }
+    .chart-intro .ci-heading { height: 28px; width: 60%; background: #c8d8f5; border-radius: 5px; margin-bottom: 10px; }
+    .chart-intro .ci-line { height: 13px; background: #dde8fb; border-radius: 3px; margin-bottom: 7px; }
+    .chart-intro .ci-line.full { width: 100%; }
+    .chart-intro .ci-line.med  { width: 70%; }
+
+    .line-chart-wrap {
+      background: #fff;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 12px;
+      padding: 28px 32px 20px;
+    }
+    .lc-inner { position: relative; height: 220px; }
+
+    /* Y-axis labels */
+    .y-axis {
+      position: absolute; left: 0; top: 0; bottom: 28px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      width: 36px;
+    }
+    .y-tick { height: 11px; width: 30px; background: #dde8fb; border-radius: 3px; }
+
+    /* grid lines */
+    .grid-lines {
+      position: absolute; left: 44px; right: 0; top: 0; bottom: 28px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .grid-line { width: 100%; height: 1px; background: #eef2fb; }
+
+    /* X-axis */
+    .x-axis {
+      position: absolute; bottom: 0; left: 44px; right: 0;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .x-tick { height: 11px; width: 36px; background: #dde8fb; border-radius: 3px; }
+
+    /* SVG chart lines */
+    .lc-svg {
+      position: absolute; left: 44px; right: 0; top: 0; bottom: 28px;
+    }
+
+    /* legend row */
+    .chart-legend {
+      display: flex; gap: 24px; justify-content: center; margin-top: 16px;
+    }
+    .cl-item { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; color: #555; }
+    .cl-line { width: 24px; height: 3px; border-radius: 2px; }
+
+    /* ── PARTNER CAROUSEL ── */
+    .carousel-section { background: #fafbff; }
+    .carousel-track { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 12px 0; }
+    .logo-tile { width: 110px; height: 52px; background: #dde8fb; border-radius: 8px; border: 1.5px solid #c0d4f8; display: flex; align-items: center; justify-content: center; color: #7a9ccc; font-size: 10px; font-weight: 600; }
+    .carousel-arrows { display: flex; justify-content: center; gap: 12px; margin-top: 14px; }
+    .arrow-btn { width: 32px; height: 32px; border-radius: 50%; background: #c0d4f8; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #4b8ef3; }
+
+    /* ── FOOTER ── */
+    .footer { background: #1a2d52; padding: 40px 32px 24px; display: flex; flex-direction: column; gap: 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 28px; }
+    .footer-logo { width: 100px; height: 26px; background: rgba(255,255,255,.22); border-radius: 4px; margin-bottom: 12px; }
+    .footer-line { height: 11px; background: rgba(255,255,255,.15); border-radius: 3px; margin-bottom: 7px; }
+    .footer-line.s { width: 60%; }
+    .footer-heading { height: 14px; width: 70%; background: rgba(255,255,255,.38); border-radius: 3px; margin-bottom: 12px; }
+    .social-icons { display: flex; gap: 10px; margin-top: 10px; }
+    .social-icon { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.2); }
+    .footer-newsletter { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-btn { background: #4b8ef3; color: #fff; font-size: 12px; font-weight: 700; padding: 9px 18px; border-radius: 18px; width: fit-content; }
+    .footer-newsletter .nl-label { height: 14px; width: 80%; background: rgba(255,255,255,.38); border-radius: 3px; margin-bottom: 4px; }
+    .footer-newsletter .nl-sub { height: 11px; width: 90%; background: rgba(255,255,255,.15); border-radius: 3px; }
+    .footer-newsletter .nl-sub.s { width: 65%; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; }
+    .footer-bottom-line { height: 11px; width: 140px; background: rgba(255,255,255,.15); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div style="text-align:center; padding: 20px 0 8px; font-size:13px; color:#4b8ef3; font-weight:700; letter-spacing:.06em; text-transform:uppercase;">
+  Code on Wheels — Impact Page — Wireframe
+</div>
+
+<div class="wireframe">
+
+  <!-- ① NAV -->
+  <nav class="nav">
+    <div class="logo-box"></div>
+    <div class="nav-links"><span></span><span></span><span></span><span></span></div>
+    <div class="nav-btn">Donate</div>
+  </nav>
+
+  <!-- ② HERO -->
+  <div class="hero">
+    <span class="section-label">Hero Banner</span>
+    <div class="headline"></div>
+    <div class="sub w1"></div>
+    <div class="sub w2"></div>
+  </div>
+
+  <!-- ③ DEMOGRAPHICS — 3-col infographic buckets -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-label">3-Column Infographic Buckets</span>
+      &nbsp; 2025 Students Served — Ethnicity · Age · Gender
+    </div>
+    <div class="three-col">
+
+      <!-- Ethnicity — bar chart -->
+      <div class="demo-card">
+        <div class="demo-heading"></div>
+        <div class="demo-year"></div>
+        <div class="bar-chart">
+          <div class="bar-wrap"><div class="bar" style="height:85px;"></div><div class="bar-label"></div></div>
+          <div class="bar-wrap"><div class="bar" style="height:55px; opacity:.55;"></div><div class="bar-label"></div></div>
+          <div class="bar-wrap"><div class="bar" style="height:35px; opacity:.4;"></div><div class="bar-label"></div></div>
+          <div class="bar-wrap"><div class="bar" style="height:20px; opacity:.3;"></div><div class="bar-label"></div></div>
+          <div class="bar-wrap"><div class="bar" style="height:10px; opacity:.25;"></div><div class="bar-label"></div></div>
+        </div>
+        <div class="note">↑ Bar chart by ethnicity</div>
+      </div>
+
+      <!-- Age — horizontal bar chart -->
+      <div class="demo-card">
+        <div class="demo-heading"></div>
+        <div class="demo-year"></div>
+        <div style="display:flex; flex-direction:column; gap:9px; margin-top:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:36px; height:10px; background:#dde8fb; border-radius:2px; flex-shrink:0;"></div>
+            <div style="height:18px; width:25%; background:#4b8ef3; border-radius:0 4px 4px 0; opacity:.3;"></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:36px; height:10px; background:#dde8fb; border-radius:2px; flex-shrink:0;"></div>
+            <div style="height:18px; width:72%; background:#4b8ef3; border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:36px; height:10px; background:#dde8fb; border-radius:2px; flex-shrink:0;"></div>
+            <div style="height:18px; width:90%; background:#4b8ef3; border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:36px; height:10px; background:#dde8fb; border-radius:2px; flex-shrink:0;"></div>
+            <div style="height:18px; width:50%; background:#4b8ef3; border-radius:0 4px 4px 0; opacity:.55;"></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:36px; height:10px; background:#dde8fb; border-radius:2px; flex-shrink:0;"></div>
+            <div style="height:18px; width:20%; background:#4b8ef3; border-radius:0 4px 4px 0; opacity:.3;"></div>
+          </div>
+        </div>
+        <div class="note">↑ Horizontal bar chart by age range</div>
+      </div>
+
+      <!-- Gender — donut chart -->
+      <div class="demo-card">
+        <div class="demo-heading"></div>
+        <div class="demo-year"></div>
+        <div style="margin-top:8px;">
+          <div class="donut-wrap">
+            <div class="donut"></div>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#4b8ef3;"></div><div class="legend-line"></div></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#aec8f7;"></div><div class="legend-line" style="width:70%;"></div></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#dde8fb;"></div><div class="legend-line" style="width:55%;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="note">↑ Donut chart by gender</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ④ OUTCOMES — 3-col stat buckets -->
+  <div class="section" style="background:#f0f5fe;">
+    <div class="section-title">
+      <span class="section-label">3-Column Stat Buckets</span>
+      &nbsp; Positive Outcomes — 2025 Student Feedback
+    </div>
+    <div class="outcomes-intro">
+      <div class="oi-heading"></div>
+      <div class="oi-line full"></div>
+      <div class="oi-line med"></div>
+    </div>
+    <div class="three-col">
+      <div class="outcome-card">
+        <div class="outcome-pct">94%</div>
+        <div class="outcome-bar-bg"><div class="outcome-bar-fill" style="width:94%;"></div></div>
+        <div class="outcome-label"></div>
+        <div class="outcome-sub"></div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-pct">88%</div>
+        <div class="outcome-bar-bg"><div class="outcome-bar-fill" style="width:88%;"></div></div>
+        <div class="outcome-label"></div>
+        <div class="outcome-sub"></div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-pct">97%</div>
+        <div class="outcome-bar-bg"><div class="outcome-bar-fill" style="width:97%;"></div></div>
+        <div class="outcome-label"></div>
+        <div class="outcome-sub"></div>
+      </div>
+    </div>
+    <div class="note" style="text-align:center; margin-top:14px;">↑ Each bucket shows a feedback result percentage from students</div>
+  </div>
+
+  <!-- ⑤ MAP EMBED -->
+  <div class="section map-section">
+    <div class="section-title">
+      <span class="section-label">Map Embed</span>
+      &nbsp; Locations Impacted — Clubs · Classes · Workshops
+    </div>
+    <div class="map-container">
+      <div class="map-bg"></div>
+      <div class="map-label-center">[ Interactive Map Embed ]</div>
+
+      <!-- Scattered pins representing locations -->
+      <div class="map-pin pin-club"     style="top:28%; left:22%;"></div>
+      <div class="map-pin pin-class"    style="top:42%; left:35%;"></div>
+      <div class="map-pin pin-workshop" style="top:55%; left:28%;"></div>
+      <div class="map-pin pin-club"     style="top:33%; left:50%;"></div>
+      <div class="map-pin pin-class"    style="top:60%; left:55%;"></div>
+      <div class="map-pin pin-workshop" style="top:38%; left:65%;"></div>
+      <div class="map-pin pin-club"     style="top:70%; left:42%;"></div>
+      <div class="map-pin pin-class"    style="top:25%; left:72%;"></div>
+      <div class="map-pin pin-workshop" style="top:50%; left:78%;"></div>
+      <div class="map-pin pin-club"     style="top:65%; left:68%;"></div>
+      <div class="map-pin pin-class"    style="top:45%; left:18%;"></div>
+      <div class="map-pin pin-workshop" style="top:20%; left:42%;"></div>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <div class="legend-row"><div class="legend-pip" style="background:#4b8ef3;"></div> CoW Club</div>
+        <div class="legend-row"><div class="legend-pip" style="background:#2ad4a0;"></div> Classes</div>
+        <div class="legend-row"><div class="legend-pip" style="background:#f0c840;"></div> Workshops</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:12px;">↑ Map shows all locations CoW has served with color-coded pins by program type</div>
+  </div>
+
+  <!-- ⑥ STUDENT TESTIMONIAL -->
+  <div class="testimonial-section">
+    <span class="testimonial-label">Student Testimonial</span>
+    <div class="quote-mark">"</div>
+    <div class="quote-line w1"></div>
+    <div class="quote-line w3"></div>
+    <div class="quote-line w2"></div>
+    <div class="quote-line w4"></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:6px;">
+      <div class="attr-name"></div>
+      <div class="attr-sub"></div>
+    </div>
+  </div>
+
+  <!-- ⑦ MULTI-YEAR LINE CHART -->
+  <div class="section chart-section">
+    <div class="section-title">
+      <span class="section-label">Single Column — Survey Data Line Chart</span>
+      &nbsp; Consistent Gains 2023–2025
+    </div>
+    <div class="chart-intro">
+      <div class="ci-heading"></div>
+      <div class="ci-line full"></div>
+      <div class="ci-line med"></div>
+    </div>
+
+    <div class="line-chart-wrap">
+      <div class="lc-inner">
+
+        <!-- Y-axis ticks: 100%, 75%, 50%, 25%, 0% -->
+        <div class="y-axis">
+          <div class="y-tick"></div>
+          <div class="y-tick"></div>
+          <div class="y-tick"></div>
+          <div class="y-tick"></div>
+          <div class="y-tick"></div>
+        </div>
+
+        <!-- Horizontal grid lines -->
+        <div class="grid-lines">
+          <div class="grid-line"></div>
+          <div class="grid-line"></div>
+          <div class="grid-line"></div>
+          <div class="grid-line"></div>
+          <div class="grid-line"></div>
+        </div>
+
+        <!-- X-axis year labels -->
+        <div class="x-axis">
+          <div class="x-tick"></div>
+          <div class="x-tick"></div>
+          <div class="x-tick"></div>
+        </div>
+
+        <!-- SVG lines: Tech Confidence, Interest in Tech, Career Interest -->
+        <svg class="lc-svg" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; left:44px; right:0; top:0; bottom:28px; width:calc(100% - 44px); height:calc(100% - 28px);">
+          <!-- Tech Confidence (blue) -->
+          <polyline points="10,45 50,28 90,15" fill="none" stroke="#4b8ef3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="45" r="3" fill="#4b8ef3"/>
+          <circle cx="50" cy="28" r="3" fill="#4b8ef3"/>
+          <circle cx="90" cy="15" r="3" fill="#4b8ef3"/>
+          <!-- Interest in Tech (teal) -->
+          <polyline points="10,58 50,44 90,30" fill="none" stroke="#2ad4a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="58" r="3" fill="#2ad4a0"/>
+          <circle cx="50" cy="44" r="3" fill="#2ad4a0"/>
+          <circle cx="90" cy="30" r="3" fill="#2ad4a0"/>
+          <!-- Career Interest (amber) -->
+          <polyline points="10,70 50,58 90,42" fill="none" stroke="#f0a830" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="70" r="3" fill="#f0a830"/>
+          <circle cx="50" cy="58" r="3" fill="#f0a830"/>
+          <circle cx="90" cy="42" r="3" fill="#f0a830"/>
+        </svg>
+
+      </div>
+
+      <!-- Chart legend -->
+      <div class="chart-legend">
+        <div class="cl-item"><div class="cl-line" style="background:#4b8ef3;"></div>Tech Confidence</div>
+        <div class="cl-item"><div class="cl-line" style="background:#2ad4a0;"></div>Interest in Tech</div>
+        <div class="cl-item"><div class="cl-line" style="background:#f0a830;"></div>Career Interest</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:10px;">↑ Y-axis: % of students reporting positive outcomes (0–100%). X-axis: 2023 · 2024 · 2025</div>
+  </div>
+
+  <!-- ⑧ PARTNER LOGO CAROUSEL -->
+  <div class="section carousel-section">
+    <div class="section-title">
+      <span class="section-label">Image Carousel</span>
+      &nbsp; Our Partners — Logo Carousel
+    </div>
+    <div class="carousel-track">
+      <div class="logo-tile">Partner 1</div>
+      <div class="logo-tile">Partner 2</div>
+      <div class="logo-tile">Partner 3</div>
+      <div class="logo-tile">Partner 4</div>
+      <div class="logo-tile">Partner 5</div>
+      <div class="logo-tile">Partner 6</div>
+    </div>
+    <div class="carousel-arrows">
+      <div class="arrow-btn">‹</div>
+      <div class="arrow-btn">›</div>
+    </div>
+  </div>
+
+  <!-- ⑨ FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="social-icons">
+          <div class="social-icon"></div><div class="social-icon"></div>
+          <div class="social-icon"></div><div class="social-icon"></div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div class="footer-newsletter">
+        <div class="nl-label"></div>
+        <div class="nl-sub"></div>
+        <div class="nl-sub s"></div>
+        <div class="newsletter-btn">Sign Up for Newsletter →</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-line"></div>
+      <div style="display:flex; gap:20px;">
+        <div class="footer-bottom-line" style="width:80px;"></div>
+        <div class="footer-bottom-line" style="width:80px;"></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Section index -->
+<div style="max-width:1100px; margin: 20px auto 40px; padding: 16px 24px; background:#fff; border:1.5px solid #c0d4f8; border-radius:8px; font-size:12px; color:#555; line-height:1.9;">
+  <strong style="font-size:13px; color:#4b8ef3;">Section Index</strong><br>
+  ① Nav Bar &nbsp;|&nbsp; ② Hero Banner &nbsp;|&nbsp;
+  ③ Demographics — 3-Col Infographic Buckets (Ethnicity bar chart · Age bar chart · Gender donut chart) &nbsp;|&nbsp;
+  ④ Positive Outcomes — 3-Col Stat Buckets with % feedback results + progress bars &nbsp;|&nbsp;
+  ⑤ Map Embed — color-coded pins for Clubs · Classes · Workshops &nbsp;|&nbsp;
+  ⑥ Student Testimonial (full-bleed blue) &nbsp;|&nbsp;
+  ⑦ Multi-Year Line Chart — Tech Confidence · Interest in Tech · Career Interest (2023–2025) &nbsp;|&nbsp;
+  ⑧ Partner Logo Carousel &nbsp;|&nbsp;
+  ⑨ Footer — Brand · Links · Contact · Newsletter (button only)
+</div>
+
+</body>
+</html>
