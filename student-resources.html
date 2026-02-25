@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code on Wheels — Student Resource Hub v2 Wireframe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #e8eef8;
+      color: #333;
+    }
+
+    .wireframe {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      border: 2px solid #bbc8e8;
+      box-shadow: 0 4px 24px rgba(75,142,243,.15);
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: #4b8ef3;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: #4b8ef3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 56px;
+    }
+    .nav .logo-box { width: 120px; height: 28px; background: rgba(255,255,255,.28); border-radius: 4px; }
+    .nav .nav-links { display: flex; gap: 20px; }
+    .nav .nav-links span { width: 70px; height: 14px; background: rgba(255,255,255,.38); border-radius: 3px; display: block; }
+    .nav .nav-btn { background: #fff; color: #4b8ef3; font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #dce8fd;
+      padding: 64px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      border-bottom: 2px dashed #a8c4f5;
+    }
+    .hero .headline { width: 480px; height: 42px; background: #aec8f7; border-radius: 6px; }
+    .hero .sub { height: 16px; background: #c4d8fa; border-radius: 4px; }
+    .hero .sub.w1 { width: 520px; }
+    .hero .sub.w2 { width: 400px; }
+
+    /* ── SHARED ── */
+    .section { padding: 48px 32px; border-bottom: 2px dashed #dde6f7; }
+    .section-title { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 20px; }
+    .note { font-size: 11px; color: #7a9ec0; font-style: italic; margin-top: 8px; }
+
+    .btn { display: inline-block; border-radius: 20px; font-size: 12px; font-weight: 700; padding: 8px 22px; cursor: default; width: fit-content; }
+    .btn-primary { background: #4b8ef3; color: #fff; }
+    .btn-outline  { border: 2px solid #4b8ef3; color: #4b8ef3; background: transparent; }
+
+    /* ── ANNOUNCEMENTS ── */
+    .announcements-section { background: #fff8e8; border-bottom: 2px dashed #f0d080; }
+    .announcements-inner {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border: 1.5px solid #f0c840;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .ann-badge {
+      background: #f0c840;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .ann-badge-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 10px; font-weight: 800;
+      color: #7a5a00;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .ann-items {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ann-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f5e090;
+    }
+    .ann-item:last-child { border-bottom: none; }
+    .ann-dot { width: 10px; height: 10px; border-radius: 50%; background: #f0c840; flex-shrink: 0; }
+    .ann-date { height: 12px; width: 70px; background: #f5e090; border-radius: 3px; flex-shrink: 0; }
+    .ann-line { height: 12px; background: #fcefc0; border-radius: 3px; flex: 1; }
+    .ann-link { height: 12px; width: 60px; background: #f0c840; border-radius: 10px; flex-shrink: 0; opacity: .6; }
+
+    /* ── FEATURED POSTS ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 20px;
+    }
+    .featured-main {
+      background: #f0f5fe;
+      border: 1.5px solid #c0d4f8;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .featured-main .fm-image {
+      height: 220px;
+      background: #aec8f7;
+      display: flex; align-items: center; justify-content: center;
+      color: #4b8ef3; font-size: 12px; font-weight: 600;
+    }
+    .featured-main .fm-content {
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .fm-tag { display: inline-block; background: #4b8ef3; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 12px; width: fit-content; }
+    .fm-heading { height: 24px; width: 90%; background: #c0d4f8; border-radius: 4px; }
+    .fm-line { height: 13px; background: #dde8fb; border-radius: 3px; }
+    .fm-line.full  { width: 100%; }
+    .fm-line.med   { width: 80%; }
+    .fm-line.short { width: 55%; }
+    .fm-meta { height: 11px; width: 40%; background: #c8d8f5; border-radius: 3px; }
+
+    .featured-side { display: flex; flex-direction: column; gap: 16px; }
+    .side-card { background: #f0f5fe; border: 1.5px solid #c0d4f8; border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 110px 1fr; flex: 1; }
+    .side-card .sc-image { background: #c0d4f8; display: flex; align-items: center; justify-content: center; color: #6a96d8; font-size: 10px; font-weight: 600; min-height: 120px; }
+    .side-card .sc-content { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .sc-tag { display: inline-block; background: #aec8f7; color: #1a4fa0; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; width: fit-content; }
+    .sc-heading { height: 16px; width: 85%; background: #c0d4f8; border-radius: 3px; }
+    .sc-line { height: 11px; background: #dde8fb; border-radius: 3px; }
+    .sc-line.full  { width: 100%; }
+    .sc-line.short { width: 70%; }
+    .sc-meta { height: 10px; width: 40%; background: #c8d8f5; border-radius: 3px; }
+
+    /* ── SEARCH + FILTER ── */
+    .filter-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 28px; flex-wrap: wrap; }
+    .search-box { flex: 1; min-width: 200px; height: 40px; background: #f0f5fe; border: 1.5px solid #c0d4f8; border-radius: 20px; display: flex; align-items: center; padding: 0 16px; gap: 10px; }
+    .search-icon { width: 16px; height: 16px; background: #aec8f7; border-radius: 50%; flex-shrink: 0; }
+    .search-placeholder { height: 12px; width: 140px; background: #d8e6fc; border-radius: 3px; }
+    .filter-chip { height: 36px; padding: 0 16px; background: #f0f5fe; border: 1.5px solid #c0d4f8; border-radius: 18px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .filter-chip.active { background: #4b8ef3; border-color: #4b8ef3; }
+    .chip-label { height: 11px; width: 60px; background: #c0d4f8; border-radius: 3px; }
+    .filter-chip.active .chip-label { background: rgba(255,255,255,.6); }
+    .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: #aec8f7; flex-shrink: 0; }
+    .filter-chip.active .chip-dot { background: rgba(255,255,255,.8); }
+
+    /* ── POST GRID (resources) ── */
+    .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .post-card { background: #f0f5fe; border: 1.5px solid #c0d4f8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+    .post-card .pc-image { height: 140px; background: #c0d4f8; display: flex; align-items: center; justify-content: center; color: #6a96d8; font-size: 10px; font-weight: 600; }
+    .post-card .pc-content { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .pc-tag { display: inline-block; background: #aec8f7; color: #1a4fa0; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; width: fit-content; }
+    .pc-heading { height: 17px; width: 90%; background: #c0d4f8; border-radius: 3px; }
+    .pc-line { height: 11px; background: #dde8fb; border-radius: 3px; }
+    .pc-line.full  { width: 100%; }
+    .pc-line.med   { width: 75%; }
+    .pc-meta { height: 10px; width: 45%; background: #c8d8f5; border-radius: 3px; margin-top: 4px; }
+
+    /* pagination */
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 32px; align-items: center; }
+    .page-btn { width: 36px; height: 36px; border-radius: 8px; background: #f0f5fe; border: 1.5px solid #c0d4f8; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #4b8ef3; }
+    .page-btn.active { background: #4b8ef3; color: #fff; border-color: #4b8ef3; }
+    .page-btn.arrow { font-size: 16px; }
+
+    /* ── STUDENT PROJECTS GRID ── */
+    .projects-section { background: #f0f5fe; }
+    /* 2-col large cards */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .project-card { background: #fff; border: 1.5px solid #c0d4f8; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .project-card .proj-image { height: 180px; background: #aec8f7; display: flex; align-items: center; justify-content: center; color: #4b8ef3; font-size: 11px; font-weight: 600; }
+    .project-card .proj-content { padding: 18px; display: flex; flex-direction: column; gap: 9px; }
+    .proj-tag { display: inline-block; background: #4b8ef3; color: #fff; font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 12px; width: fit-content; }
+    .proj-heading { height: 20px; width: 80%; background: #c0d4f8; border-radius: 4px; }
+    .proj-line { height: 12px; background: #dde8fb; border-radius: 3px; }
+    .proj-line.full  { width: 100%; }
+    .proj-line.med   { width: 75%; }
+    .proj-line.short { width: 55%; }
+    .proj-meta { height: 11px; width: 45%; background: #c8d8f5; border-radius: 3px; }
+
+    /* ── FOOTER ── */
+    .footer { background: #1a2d52; padding: 40px 32px 24px; display: flex; flex-direction: column; gap: 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 28px; }
+    .footer-logo { width: 100px; height: 26px; background: rgba(255,255,255,.22); border-radius: 4px; margin-bottom: 12px; }
+    .footer-line { height: 11px; background: rgba(255,255,255,.15); border-radius: 3px; margin-bottom: 7px; }
+    .footer-line.s { width: 60%; }
+    .footer-heading { height: 14px; width: 70%; background: rgba(255,255,255,.38); border-radius: 3px; margin-bottom: 12px; }
+    .social-icons { display: flex; gap: 10px; margin-top: 10px; }
+    .social-icon { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.2); }
+    .footer-newsletter { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-btn { background: #4b8ef3; color: #fff; font-size: 12px; font-weight: 700; padding: 9px 18px; border-radius: 18px; width: fit-content; }
+    .footer-newsletter .nl-label { height: 14px; width: 80%; background: rgba(255,255,255,.38); border-radius: 3px; margin-bottom: 4px; }
+    .footer-newsletter .nl-sub { height: 11px; width: 90%; background: rgba(255,255,255,.15); border-radius: 3px; }
+    .footer-newsletter .nl-sub.s { width: 65%; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; }
+    .footer-bottom-line { height: 11px; width: 140px; background: rgba(255,255,255,.15); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div style="text-align:center; padding: 20px 0 8px; font-size:13px; color:#4b8ef3; font-weight:700; letter-spacing:.06em; text-transform:uppercase;">
+  Code on Wheels — Student Resource Hub v2 — Page Wireframe
+</div>
+
+<div class="wireframe">
+
+  <!-- ① NAV -->
+  <nav class="nav">
+    <div class="logo-box"></div>
+    <div class="nav-links"><span></span><span></span><span></span><span></span></div>
+    <div class="nav-btn">Donate</div>
+  </nav>
+
+  <!-- ② HERO -->
+  <div class="hero">
+    <span class="section-label">Hero Banner</span>
+    <div class="headline"></div>
+    <div class="sub w1"></div>
+    <div class="sub w2"></div>
+  </div>
+
+  <!-- ③ ANNOUNCEMENTS -->
+  <div class="section announcements-section">
+    <div class="section-title">
+      <span class="section-label" style="background:#d4a800; color:#fff;">Announcements</span>
+      &nbsp; Timely information for students
+    </div>
+    <div class="announcements-inner">
+      <div class="ann-badge">
+        <div class="ann-badge-text">Announcements</div>
+      </div>
+      <div class="ann-items">
+        <div class="ann-item">
+          <div class="ann-dot"></div>
+          <div class="ann-date"></div>
+          <div class="ann-line"></div>
+          <div class="ann-link"></div>
+        </div>
+        <div class="ann-item">
+          <div class="ann-dot"></div>
+          <div class="ann-date"></div>
+          <div class="ann-line"></div>
+          <div class="ann-link"></div>
+        </div>
+        <div class="ann-item">
+          <div class="ann-dot"></div>
+          <div class="ann-date"></div>
+          <div class="ann-line" style="width:60%;"></div>
+          <div class="ann-link"></div>
+        </div>
+      </div>
+    </div>
+    <div class="note">↑ Time-sensitive announcements for students — dates, text, and optional link per item</div>
+  </div>
+
+  <!-- ④ FEATURED / RECENT POSTS -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-label">Featured Posts Grid</span>
+      &nbsp; Highlighted Resources — by Date or Category
+    </div>
+    <div class="featured-grid">
+      <div class="featured-main">
+        <div class="fm-image">[ Featured Image ]</div>
+        <div class="fm-content">
+          <div class="fm-tag">Featured</div>
+          <div class="fm-heading"></div>
+          <div class="fm-line full"></div>
+          <div class="fm-line med"></div>
+          <div class="fm-line full"></div>
+          <div class="fm-line short"></div>
+          <div class="fm-meta"></div>
+          <div class="btn btn-primary" style="font-size:11px; padding:6px 16px; margin-top:4px;">Read More →</div>
+        </div>
+      </div>
+      <div class="featured-side">
+        <div class="side-card">
+          <div class="sc-image">[ Img ]</div>
+          <div class="sc-content">
+            <div class="sc-tag">Resource</div>
+            <div class="sc-heading"></div>
+            <div class="sc-line full"></div>
+            <div class="sc-line short"></div>
+            <div class="sc-meta"></div>
+            <div class="btn btn-outline" style="font-size:10px; padding:4px 12px; margin-top:4px;">Read More →</div>
+          </div>
+        </div>
+        <div class="side-card">
+          <div class="sc-image">[ Img ]</div>
+          <div class="sc-content">
+            <div class="sc-tag">Tutorial</div>
+            <div class="sc-heading"></div>
+            <div class="sc-line full"></div>
+            <div class="sc-line short"></div>
+            <div class="sc-meta"></div>
+            <div class="btn btn-outline" style="font-size:10px; padding:4px 12px; margin-top:4px;">Read More →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note">↑ Featured/recent posts highlighted by date or category</div>
+  </div>
+
+  <!-- ⑤ SEARCH + FILTER + POST GRID -->
+  <div class="section" style="background:#f7f9ff;">
+    <div class="section-title">
+      <span class="section-label">Search, Filter &amp; Post Grid</span>
+      &nbsp; Browse All Resources
+    </div>
+    <div class="filter-bar">
+      <div class="search-box">
+        <div class="search-icon"></div>
+        <div class="search-placeholder"></div>
+      </div>
+      <div class="filter-chip active"><div class="chip-dot"></div><div class="chip-label"></div></div>
+      <div class="filter-chip"><div class="chip-dot"></div><div class="chip-label"></div></div>
+      <div class="filter-chip"><div class="chip-dot"></div><div class="chip-label"></div></div>
+      <div class="filter-chip"><div class="chip-dot"></div><div class="chip-label"></div></div>
+      <div class="filter-chip"><div class="chip-dot"></div><div class="chip-label"></div></div>
+    </div>
+    <div class="note" style="margin-bottom:20px; margin-top:-14px;">↑ Search bar + category filter chips</div>
+
+    <div class="post-grid">
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Tutorial</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Resource</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Guide</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Tutorial</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Video</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+      <div class="post-card"><div class="pc-image">[ Thumbnail ]</div><div class="pc-content"><div class="pc-tag">Resource</div><div class="pc-heading"></div><div class="pc-line full"></div><div class="pc-line med"></div><div class="pc-meta"></div></div></div>
+    </div>
+
+    <div class="pagination">
+      <div class="page-btn arrow">‹</div>
+      <div class="page-btn active">1</div>
+      <div class="page-btn">2</div>
+      <div class="page-btn">3</div>
+      <div class="page-btn" style="font-size:14px; color:#aec8f7;">…</div>
+      <div class="page-btn">8</div>
+      <div class="page-btn arrow">›</div>
+    </div>
+    <div class="note" style="text-align:center;">↑ Pagination for resource posts</div>
+  </div>
+
+  <!-- ⑥ STUDENT PROJECTS GRID -->
+  <div class="section projects-section">
+    <div class="section-title">
+      <span class="section-label">Student Projects Grid</span>
+      &nbsp; Featured Student Work
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="proj-image">[ Project Screenshot ]</div>
+        <div class="proj-content">
+          <div class="proj-tag">Web Dev</div>
+          <div class="proj-heading"></div>
+          <div class="proj-line full"></div>
+          <div class="proj-line med"></div>
+          <div class="proj-line short"></div>
+          <div class="proj-meta"></div>
+          <div class="btn btn-primary" style="font-size:11px; padding:6px 16px; margin-top:4px;">View Project →</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="proj-image">[ Project Screenshot ]</div>
+        <div class="proj-content">
+          <div class="proj-tag">Game Dev</div>
+          <div class="proj-heading"></div>
+          <div class="proj-line full"></div>
+          <div class="proj-line med"></div>
+          <div class="proj-line short"></div>
+          <div class="proj-meta"></div>
+          <div class="btn btn-primary" style="font-size:11px; padding:6px 16px; margin-top:4px;">View Project →</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="proj-image">[ Project Screenshot ]</div>
+        <div class="proj-content">
+          <div class="proj-tag">App Dev</div>
+          <div class="proj-heading"></div>
+          <div class="proj-line full"></div>
+          <div class="proj-line med"></div>
+          <div class="proj-line short"></div>
+          <div class="proj-meta"></div>
+          <div class="btn btn-primary" style="font-size:11px; padding:6px 16px; margin-top:4px;">View Project →</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="proj-image">[ Project Screenshot ]</div>
+        <div class="proj-content">
+          <div class="proj-tag">Web Dev</div>
+          <div class="proj-heading"></div>
+          <div class="proj-line full"></div>
+          <div class="proj-line med"></div>
+          <div class="proj-line short"></div>
+          <div class="proj-meta"></div>
+          <div class="btn btn-primary" style="font-size:11px; padding:6px 16px; margin-top:4px;">View Project →</div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:16px;">↑ Student project buckets — each links to live project</div>
+  </div>
+
+  <!-- ⑦ FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"></div>
+        <div class="footer-line"></div>
+        <div class="footer-line s"></div>
+        <div class="footer-line"></div>
+        <div class="social-icons">
+          <div class="social-icon"></div><div class="social-icon"></div>
+          <div class="social-icon"></div><div class="social-icon"></div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div>
+        <div class="footer-heading"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+        <div class="footer-line"></div><div class="footer-line s"></div>
+      </div>
+      <div class="footer-newsletter">
+        <div class="nl-label"></div>
+        <div class="nl-sub"></div>
+        <div class="nl-sub s"></div>
+        <div class="newsletter-btn">Sign Up for Newsletter →</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-line"></div>
+      <div style="display:flex; gap:20px;">
+        <div class="footer-bottom-line" style="width:80px;"></div>
+        <div class="footer-bottom-line" style="width:80px;"></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Section index -->
+<div style="max-width:1100px; margin: 20px auto 40px; padding: 16px 24px; background:#fff; border:1.5px solid #c0d4f8; border-radius:8px; font-size:12px; color:#555; line-height:1.9;">
+  <strong style="font-size:13px; color:#4b8ef3;">Section Index</strong><br>
+  ① Nav Bar &nbsp;|&nbsp; ② Hero Banner &nbsp;|&nbsp;
+  ③ Announcements — time-sensitive info with date + link per item &nbsp;|&nbsp;
+  ④ Featured/Recent Posts Grid — 1 large + 2 side cards &nbsp;|&nbsp;
+  ⑤ Search Bar + Category Filter Chips + 3-Col Resource Post Grid + Pagination &nbsp;|&nbsp;
+  ⑥ Student Projects Grid — 2-Col, 4 project cards each linking to live project &nbsp;|&nbsp;
+  ⑦ Footer — Brand · Links · Contact · Newsletter (button only)
+</div>
+
+</body>
+</html>
